@@ -1,3 +1,65 @@
-#heading {
-    color: blueviolet;
+.main {
+    margin:10px;
+} 
+
+.img {
+    width: 100px;
+    padding: 10px;
+}
+
+.heading {
+    margin:auto;
+    border:5px solid cadetblue(247, 233, 43);
+    display: flex;
+    background-color: cadetblue;
+}
+
+.list {
+    margin-left: auto;
+}
+
+.ul-list {
+    display: flex;
+    list-style-type: none;
+    padding: 20px;
+}
+
+.li-style {
+    margin: 10px;
+    color: brown;
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
+}
+.li-style:hover{
+    color: chocolate;
+}
+
+.container {
+    display: flex;
+    flex-wrap:wrap;
+}
+
+.card {
+    margin: 5px;
+    width: 200px;
+    background-color: rgb(238, 240, 240);
+}
+
+.card:hover {
+    cursor: pointer;
+    border: 2px solid  rgb(214, 238, 238);
+}
+
+.card-img{
+    width: 180px;
+    height: 150px;
+    margin: 10px;
+}
+
+.card-content {
+    font-size: medium;
+    font-weight: bold;
+    padding: 10px;
+    line-height: 15px;
 }
