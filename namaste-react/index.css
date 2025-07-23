@@ -63,3 +63,116 @@
     padding: 10px;
     line-height: 15px;
 }
+
+.res-filter {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search-filter {
+    margin: 10px;
+    padding: 10px;
+}
+
+.search-btn {
+    width: 80px;
+    height: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.filter-btn {
+    margin: 10px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.shimmer-serach {
+    display: flex;
+}
+
+.filter-btn:hover {
+    cursor: pointer;
+}
+
+
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.shimmer-div-container {
+    margin: 10px;
+    padding: 10px;
+    height: 15px;
+    width: 180px;
+    background: linear-gradient(
+        to right,
+        #cfd8dc 0%,
+        #eceff1 20%,
+        #cfd8dc 40%,
+        #cfd8dc 100%
+    );
+    background-size: 800px 400px;
+
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* Corrected shimmer-card class */
+.shimmer-card {
+    margin: 5px;
+    width: 180px;
+    height: 420px;
+
+    /* The actual shimmer gradient */
+    background: linear-gradient(
+        to right,
+        #cfd8dc 0%,
+        #eceff1 20%,
+        #cfd8dc 40%,
+        #cfd8dc 100%
+    );
+    background-size: 800px 400px;
+
+    animation: shimmer 1.5s infinite linear;
+}
+
+.shimmer-search {
+    margin: 10px;
+    padding: 10px;
+    height: 15px;
+    width: 180px;
+       background: linear-gradient(
+        to right,
+        #cfd8dc 0%,
+        #eceff1 20%,
+        #cfd8dc 40%,
+        #cfd8dc 100%
+    );
+    background-size: 800px 400px;
+
+    animation: shimmer 1.5s infinite linear;
+}
+
+
+/* ❗Use the same name as in `animation:` above */
+@keyframes shimmer {
+    0% {
+        background-position: -800px 0;
+    }
+    100% {
+        background-position: 800px 0;
+    }
+}
+
+.authButton {
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: bisque;
+}
+
+
