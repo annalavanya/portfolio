@@ -1,16 +1,17 @@
+import {IMAGE_URL} from "../utility/constants"
 const CardComponent = (props) => {
-    const { resName, foodName, cuisines, ratings, time, imageUrl } = props?.resData;
+    const { name, cuisines, avgRating, costForTwo, cloudinaryImageId, sla: { slaString } } = props?.resData?.info;
     return (
         <div className="card">
             <img className="card-img" 
-            src= {imageUrl}
+            src= {IMAGE_URL+cloudinaryImageId}
             alt="Food Image"/>
             <div className="card-content">
-                <h4>{resName}</h4>
-                <h4>{foodName}</h4>
+                <h4>{name}</h4>
                 <h4>{cuisines.join(", ")}</h4>
-                <h4>{ratings+ " " + "stars"}</h4>
-                <h4>{time}</h4>
+                <h4>{avgRating} ratings</h4>
+                <h4>{costForTwo}</h4>
+                <h4>{slaString}</h4>
             </div>
         </div>
     )

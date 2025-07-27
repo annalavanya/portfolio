@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LOGO_URL } from "../utility/constants";
+import {Link} from "react-router-dom";
 const HeaderComponent = () => {
     const [authButton, setAuthButton] = useState('LOGIN');
+
+    console.log("component called");
+
+    useEffect(() => {
+        console.log("useEffect called");
+    },[]);
+
     return (
         <div className="heading">
             <div className="img-div">
@@ -9,9 +17,9 @@ const HeaderComponent = () => {
             </div>
             <div className="list">
                 <ul className="ul-list">
-                    <li className="li-style">Home</li>
-                    <li className="li-style">About Us</li>
-                    <li className="li-style">Contact Us</li>
+                    <li className="li-style"><Link to='/' style={{ textDecoration: 'none' }}>Home</Link></li>
+                    <li className="li-style"><Link to='/about' style={{ textDecoration: 'none' }}>About Us</Link></li>
+                    <li className="li-style"><Link to='/contact' style={{ textDecoration: 'none' }}>Contact Us</Link></li>
                     <li className="li-style">Cart</li>
                     <li className="li-style">
                         <button className="authButton" onClick={

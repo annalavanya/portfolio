@@ -1,7 +1,7 @@
 import  CardComponent from "./RestraurantCard";
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import ShimmerComponent from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const BodyComponent = () => {
     const [resLists, setResLists] = useState([]);
@@ -16,9 +16,10 @@ const BodyComponent = () => {
     }, []);
 
     const getFetchedData = async () => {
-        const fetchedData =  await axios.get("http://localhost:3000/product");
-        setResLists(fetchedData?.data?.data);
-        setFilteredResLists(fetchedData?.data?.data);
+        const fetchedData =  await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=8.715017999999999&lng=77.765628&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const json = await fetchedData.json();
+        setResLists(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredResLists(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
     return (resLists.length === 0) ? <ShimmerComponent/> :(
@@ -31,7 +32,7 @@ const BodyComponent = () => {
                         () => {
                             console.log("Clicked", searchButton);
                             const lists = resLists.filter((val) => {
-                                return val.resName.toLowerCase().includes(searchButton.toLowerCase());
+                                return val?.info?.name?.toLowerCase().includes(searchButton.toLowerCase());
                             });
                             console.log(lists);
                             setFilteredResLists(lists);
@@ -41,7 +42,7 @@ const BodyComponent = () => {
                 </div>
                 <button className="filter-btn" 
                     onClick={() => {
-                        const filteredResList = resLists.filter((res) => res.ratings > 4);
+                        const filteredResList = resLists.filter((res) => res?.info?.avgRating > 4.2);
                             setResLists(filteredResList);
                             setFilteredResLists(filteredResList);
                         }
@@ -52,8 +53,8 @@ const BodyComponent = () => {
             <div className="container">
                 {   
                     filteredResLists.map((res) => (
-                        <CardComponent key={res.id} resData = {res}/>
-                    )) 
+                        <Link to={"/restaurant/"+ res?.info?.id}  style={{ textDecoration: 'none' }} key={res?.info?.id}><CardComponent resData = {res}/></Link>
+                    ))
                 }
             </div>
         </div>
