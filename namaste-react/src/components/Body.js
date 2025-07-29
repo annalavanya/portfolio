@@ -2,6 +2,7 @@ import  CardComponent from "./RestraurantCard";
 import { useEffect, useState } from "react";
 import ShimmerComponent from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utility/useOnlineStatus";
 
 const BodyComponent = () => {
     const [resLists, setResLists] = useState([]);
@@ -14,6 +15,8 @@ const BodyComponent = () => {
     useEffect(()=> {
         getFetchedData();
     }, []);
+
+    if(useOnlineStatus() === false) return <h1>You are in Offline!!!</h1>;
 
     const getFetchedData = async () => {
         const fetchedData =  await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=8.715017999999999&lng=77.765628&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");

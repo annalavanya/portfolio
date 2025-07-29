@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { LOGO_URL } from "../utility/constants";
 import {Link} from "react-router-dom";
+import useOnlineStatus from "../utility/useOnlineStatus";
+
 const HeaderComponent = () => {
     const [authButton, setAuthButton] = useState('LOGIN');
 
@@ -10,6 +12,8 @@ const HeaderComponent = () => {
         console.log("useEffect called");
     },[]);
 
+    const onlineStatus = useOnlineStatus();
+
     return (
         <div className="heading">
             <div className="img-div">
@@ -17,6 +21,8 @@ const HeaderComponent = () => {
             </div>
             <div className="list">
                 <ul className="ul-list">
+                    <li className="li-style"><Link to='/grocery' style={{ textDecoration: 'none' }}>Grocery</Link></li>
+                    <li className="li-style">Online Status:{onlineStatus ? "🟢" : "🔴"}</li>
                     <li className="li-style"><Link to='/' style={{ textDecoration: 'none' }}>Home</Link></li>
                     <li className="li-style"><Link to='/about' style={{ textDecoration: 'none' }}>About Us</Link></li>
                     <li className="li-style"><Link to='/contact' style={{ textDecoration: 'none' }}>Contact Us</Link></li>

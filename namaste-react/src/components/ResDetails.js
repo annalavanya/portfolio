@@ -1,23 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { RES_DETAILS } from "../utility/constants";
 import ShimmerComponent from "./Shimmer";
+import useRestaurantDetail from "../utility/useRestaurantDetail";
 
 const ResDetail = () => {
-    const [resDetails, setResDetails] = useState(null);
-
     const { resId } = useParams();
-    console.log(resId);
 
-    useEffect(() => {
-        getResDetailsFromBackend();
-    }, []);
-
-    const getResDetailsFromBackend = async () => {
-        const data = await fetch(RES_DETAILS+resId);
-        const json = await data.json();
-        setResDetails(json?.data?.cards);
-    };
+    const resDetails = useRestaurantDetail(resId);
 
     if(resDetails === null) return <ShimmerComponent/>;
     
