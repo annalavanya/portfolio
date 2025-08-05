@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
 import ShimmerComponent from "./Shimmer";
 import useRestaurantDetail from "../utility/useRestaurantDetail";
+import RestaurantItem from "./RestaurantItem";
+import { useState } from "react";
 
 const ResDetail = () => {
     const { resId } = useParams();
+
+     const [isAccordian, setIsAccordian] = useState(null);
 
     const resDetails = useRestaurantDetail(resId);
 
@@ -11,18 +15,23 @@ const ResDetail = () => {
     
     const { name } = resDetails[2]?.card?.card?.info;
     const { itemCards }  = resDetails[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
-    console.log("cards", itemCards);
+
+
+    const categories = 
+        resDetails[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => 
+            c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
+
 
     return (!itemCards) ? <h2>No Details Found</h2> : (
-        <div>
-            <h2>{name}</h2>
-            <ul>
+        <div className="w-6/12 m-auto my-6 text-center text-black">
+        <h2 className="text-xl font-bold">{name}</h2>
+            <div className="">
                 {
-                    itemCards.map((res) => <li key={res?.card?.info?.id}>{res?.card?.info?.name}  -  {"Rs."}
-                    { res?.card?.info?.price/100 || res?.card?.info?.variantsV2?.variantGroups[1]?.variations[0]?.price}
-                    </li>)
+                    categories.map((data, index) => <RestaurantItem key={data?.card?.card?.title} {...data} 
+                    isAccordian = { index === isAccordian ? true : false } 
+                    showAccordian = {(isAccordian === index) ?  () => setIsAccordian(null): () => setIsAccordian(index)}/> )
                 }
-            </ul>
+            </div>
         </div>
     )
 }

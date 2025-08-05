@@ -1,7 +1,8 @@
 import React from 'react';
-import User from './User';
 import UserClass from './UserClass';
 
+// context
+import UserContext from '../utility/UserContext';
 
 class About extends React.Component {
     constructor(props) {
@@ -50,6 +51,13 @@ class About extends React.Component {
         return (!this?.state?.userObj?.avatar_url || !this?.state?.userObj?.login) ? <h1>Loading...</h1> : (
             <div>
                 <h3>This is a About us Page</h3>
+
+                <UserContext.Consumer>
+                    {
+                        ({user}) => ( <h4>UserName: {user}</h4> )
+                    }
+                </UserContext.Consumer>
+
                 <img src={avatar_url} alt='Image'></img>
                 <h4>ID: {id}</h4>
                 <h4>NAME: {login}</h4>

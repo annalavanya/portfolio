@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "react/jsx-dev-runtime";
 import HeaderComponent from "../src/components/Header";
@@ -9,14 +9,28 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import ResDetail from "./components/ResDetails";
 
-
 const Grocery = lazy(() => import("./components/Grocery"));
+
+import UserContext from "./utility/UserContext";
 
 
 const MainApp = () => {
+    const [userNameUpdate, setUserNameUpdate] = useState();
+
+    useEffect(() => {
+    const data = {
+        user: "Lavanya"
+    }
+
+    setUserNameUpdate(data?.user);
+
+},[]);
+
    return (<div className="main">
+    <UserContext.Provider value={{user: userNameUpdate, setUserNameUpdate}}>
         <HeaderComponent/>
         <Outlet/>
+    </UserContext.Provider>
     </div>)
 }
 
